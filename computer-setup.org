@@ -1,0 +1,100 @@
+
+* Computer setup
+
+** OS
+
+   The idea is to start from a server installation and build a desktop environment from it, using only packages that are really needed
+   - We start from a Custom Fedora Server 35 install, ticking only the Network Manager extra packages
+   - Install wifi firmware package iwl 7260 with `sudo rpm -i package.rpm`
+   - Always update system after install with `sudo dnf update`
+   - By default, the server only took 15G of the available space on the hard drive. Using `sudo lvresize -r -L +10G /dev/mapper/fedora_fedora_root` we can adjust it to the full capacity of the hard drive.
+   - Install some very basic packages: vim emacs git zsh wget sakura firefox thunar flameshot baobab
+
+** Terminal
+
+   - Change default shell with `sudo lchsh $user` and use /usr/bin/zsh instead of bash
+   - Install zinit (https://github.com/zdharma-continuum/zinit), start new shell and then update .zshrc
+
+** Desktop environment
+
+   - We install the X server package `xorg-x11-server-Xorg`, as well as `xinput` which has some convenient utilities (`xinput list`), and video drivers `xorg-x11-drivers`
+   - Some light screen tearing was happening, creating a conf file for intel fixed it /etc/X11/x.conf.d/20-intel.conf (https://www.maketecheasier.com/get-rid-screen-tearing-linux/)
+
+*** Display manager
+
+    - We will use `lightdm` as a display manager. Enable the service with `sudo sytemctl enable lightdm.service`
+    - For some reason, lightdm does not source .xprofile by default. We dupplicated the default `session-wrapper` script `sudo cp /etc/X11/xinit/Xsession /usr/local/bin/Xsession` and added a line `. /home/bertrand/.xprofile`. The xprofile makes some general X adjustments (touchpad)
+    - We will use slick-greeter as a greeter. Update /etc/lightdm/lightdm.conf, changing greeter-session=slick-greeter
+    - We change the default boot target of our system to a GUI one, using `sudo systemctl set-default graphical.target` (see https://www.computernetworkingnotes.com/linux-tutorials/systemd-target-units-explained.
+    - We can set up a custom wallpaper for the login. Here we put the jpg file in /usr/share/backgrounds/bg.jpg, made sure it was owned by root:root and chmod 777, and then updated the /etc/lightdm/slick-greeter.conf file accordingly
+
+*** Window manager
+
+    - We install `i3`
+    - We install `brightnessctl` to manage the light of the screen
+    - Few adjustments to the i3 ~/.config/i3/config file --> change from jkl; to hjlk + some bindsym for sound/light control. `xev` package is useful to figure out what name each keyboard key has
+      
+** Fonts
+
+   - Installed "Fonts" dnf group, probably a bit of an overkill but it's only 150mb
+
+** Keyboard layout
+
+   - We set the available keyboard layouts using a `setxkbmap` command in the .xprofile. We set us intl and gr, using win+space as a toggler (https://simpleit.rocks/linux/switch-keyboard-layouts/)
+   - We added a custom Xorg configuration file `/etc/X11/xorg.conf.d/90-custom-kbd.conf` that converts to the CapsLock key to Ctrl
+
+** SSH
+
+   - `ssh-keygen` to generate ssh key
+
+     
+**  Connections
+
+   - Installed `blueberry` to have a GUI with bluetooth
+
+** Emacs
+
+   - download Fira Code and put .ttf files in ~/.fonts
+   - remove ~/.emacs.d directory and create ~/.config/emacs and put config files in there
+   - run `M-x all-the-icons-install-fonts`
+
+** Multimedia
+
+   - Sound countrol through the keyboard worked automatically (i3 config file)
+   - Images: `vimiv` simple light image viewer with vim binding (n/p to change image, hjkl to move, +/- to zoom, >/< to rotate).
+   - Also added `feh` for images
+   - Video: installed `mpv` and `vlc`. It needs the rpmfusion package repo https://rpmfusion.org/Configuration
+   - Music: `clementine`
+       
+** BitTorrent
+
+   - `transmission`
+
+** Utility Apps
+
+   - 1password is being installed directly with rpm through the rpm file distributed on their website
+          
+** Cloud
+
+   - setup `nextcloud-client`
+
+** Web Server
+
+   - Installed `vagrant`
+
+** Rust Embedded
+
+   - We are mainly following https://docs.rust-embedded.org/discovery/microbit/03-setup/index.html
+   - install `minicom gdb`
+   - we install rust using rustup https://rustup.rs/, it will install `rust cargo`
+   - it required to install `systemd-devel`
+   - Through rustup we install additional components (see website)
+
+   
+** TODO
+   - How to have Nextcloud in Thunar?
+   - SMB share in Thunar
+   - Show sound/light info in the bar
+   - Kill CapsLock
+   - email client
+   - What happens when an HDMI is plugged?

@@ -1,0 +1,75 @@
+
+*Welcome sire*
+
+* TODO Poster
+** TODO Posting
+*** TODO Single
+**** Missing
+     
+     - [ ] New preview template
+     - [ ] Redirect to confirmation page
+     - [ ] Link flow
+     - [ ] 
+
+**** Bug
+     
+     - [ ] WYSIWYG validation: difference between HTML and text length
+     - [ ] Recap contact information not displayed on the love letter
+     - [ ] 
+     
+**** Design
+
+     - [ ] Unwanted rounded borders on the recap
+     - [ ] WYSIWYG error state positioning
+     - [ ] WYSIWYG description overlaps with max length
+     - [ ] 
+
+**** Enhancement
+     
+     - [ ] avoid dupplicated empty lines on wysiwyg submissions
+     - [ ] hide status bar when reaching the end of the page
+     - [ ] make back button scroll back to the LetterTeaser module
+     - [ ] Show field errors as the user types
+     - [ ] 
+       
+*** TODO Links
+
+
+* TODO Visitor 
+** TODO Homepage
+
+   Links: [[http://woloho.local][Local]] - [[https://woloho.nongrata.tech][Staging]]
+
+** TODO Static pages 
+** TODO Subscribing
+
+
+* TODO Subscriber
+** TODO Unsubscribe
+** TODO Update preferences
+
+
+* TODO Editor
+** TODO Inbox
+*** TODO Filter
+*** TODO Order
+*** TODO Gather
+** TODO Edit 
+** TODO Accept
+** TODO Reject 
+** TODO Build
+** TODO Send
+** TODO Plan
+** TODO Cancel
+
+
+* Administrator
+
+
+* Developer 
+
+#+begin_src php
+
+var_dump('your code');
+
+#+end_src
