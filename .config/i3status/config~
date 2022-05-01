@@ -1,0 +1,57 @@
+general {
+        output_format = "i3bar"
+        colors = true
+        interval = 5
+}
+
+order += "wireless wlp1s0"
+order += "disk /"
+order += "battery 0"
+order += "cpu_temperature 0"
+order += "memory"
+order += "load"
+order += "volume master"
+order += "tztime local"
+
+disk "/" {
+        format = " %free"
+}
+
+wireless wlp1s0 {
+        format_up = "%quality at %essid, %bitrate) %ip"
+        format_down = ""
+}
+
+battery 0 {
+        format = "%status %percentage"
+        format_down = "No battery"
+        status_chr = "⚡CHR"
+        status_bat = "🔋BAT"
+        status_unk = "?UNK"
+        status_full = "☻FULL"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+volume master {
+        format = "♪: %volume"
+        format_muted = "♪: muted (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
+}
+
+load {
+        format = "%5min"
+}
+
+cpu_temperature 0 {
+        format = "%degrees°C"
+        path = "/sys/class/thermal/thermal_zone3/temp"
+}
+
+memory {
+        format = "%used"
+        threshold_degraded = "10%"
+        format_degraded = "MEMORY: %free"
+}
