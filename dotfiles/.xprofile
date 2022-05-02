@@ -1,0 +1,4 @@
+xinput set-prop "ELAN1200:00 04F3:3059 Touchpad" "libinput Tapping Enabled" 1 &
+xinput set-prop "ELAN1200:00 04F3:3059 Touchpad" "libinput Natural Scrolling Enabled" 1 &
+setxkbmap -model pc105 -layout us,gr -variant intl,  -option grp:win_space_toggle &
+feh --bg-fill --randomize ~/.wallpapers 
